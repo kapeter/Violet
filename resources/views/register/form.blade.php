@@ -22,7 +22,7 @@
 			<h1>{{ $user['nickname'] }}</h1>
 			<p>欢迎参加2018年部门年会。</p>
 			<p>请填写以下信息，参加年会抽奖。</p>
-			<form class="form" id="form" action="/register" method="POST">
+			<form class="form" id="form" action="/wechat/register" method="POST">
 				{{ csrf_field() }}
 				<div class="form-group">
 					<input type="text" name="name" placeholder="真实姓名">
