@@ -22,7 +22,7 @@
             <h1>{{ $user['fullname'] }}</h1>
             <p>欢迎参加2018年部门年会。</p>
             <p>您已进入抽奖池，祝您好运。</p>
-            <img src="images/it.png" alt="map" class="map">
+            <img src="/images/it.png" alt="map" class="map">
             <p class="text-left">地址：新区玉山路69号(近馨泰花园北门)</p>
             <p class="text-left">时间：1月19日 18:00</p>
         </div>

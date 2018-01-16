@@ -23,7 +23,7 @@ class RegisterController extends Controller
     {
         $wxUser = session('wechat.oauth_user.default');
        	
-       	$userData = $this->party->where('openid', $wxUser['openid'])->first();
+       	$userData = $this->party->where('openid', $wxUser['id'])->first();
 
        	// 如果有记录，直接进入成功页面
        	if ($userData){
@@ -42,7 +42,7 @@ class RegisterController extends Controller
     {
         $wxUser = session('wechat.oauth_user.default');
 
-        $userData = $this->party->where('openid', $wxUser['openid'])->first();
+        $userData = $this->party->where('openid', $wxUser['id'])->first();
 
         if (!$userData){
           $userData = [
