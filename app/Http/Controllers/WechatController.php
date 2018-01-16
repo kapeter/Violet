@@ -7,6 +7,7 @@ use Overtrue\Socialite\User as SocialiteUser;
 
 class WechatController extends Controller
 {
+
     /**
      * 处理微信的请求消息
      *
@@ -14,6 +15,12 @@ class WechatController extends Controller
      */
     public function serve()
     {
-        return dd(session('wechat.oauth_user.default'));
+        $app = app('wechat.official_account');
+
+        $app->server->push(function($message){
+            return "欢迎关注 kapeter";
+        });
+
+        return $app->server->serve();
     }
 }
