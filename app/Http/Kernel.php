@@ -37,7 +37,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
 
             // 开发用
-            \App\Http\Middleware\GenerateUser::class
+            // \App\Http\Middleware\GenerateUser::class
         ],
 
         'api' => [

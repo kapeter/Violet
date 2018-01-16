@@ -12,6 +12,11 @@ class Party extends Model
      * @var array
      */
     protected $fillable = [
-        'openid', 'nickname', 'headimgurl', 'fullname', 'number', 'has_drawn'
+        'openid', 
+        'nickname', 
+        'headimgurl', 
+        'fullname', 
+        'number', 
+        'has_drawn'
     ];
 }

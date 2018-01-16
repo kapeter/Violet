@@ -15,21 +15,50 @@ class RegisterController extends Controller
         $this->party = $party;
     }
     /**
-     * 收集用户信息
+     * 处理页面请求
      *
      * @return view
      */
     public function index()
     {
-        $user = session('wechat.oauth_user.default');
+        $wxUser = session('wechat.oauth_user.default');
        	
-       	$userTest = $this->party->where('openid', $user['openid'])->first();
+       	$userData = $this->party->where('openid', $wxUser['openid'])->first();
 
        	// 如果有记录，直接进入成功页面
-       	if ($userTest){
-       		return view('register.success', ['user' => $user]);
+       	if ($userData){
+       		return view('register.success', ['user' => $userData]);
        	}else{
-       		return view('register.form', ['user' => $user]);
+       		return view('register.form', ['user' => $wxUser]);
        	}
+    }
+
+    /**
+     * 保存用户信息
+     *
+     * @return view
+     */
+    public function store(Request $request)
+    {
+        $wxUser = session('wechat.oauth_user.default');
+
+        $userData = $this->party->where('openid', $wxUser['openid'])->first();
+
+        if (!$userData){
+          $userData = [
+            'openid'     => $wxUser['openid'],
+            'nickname'   => $wxUser['nickname'], 
+            'headimgurl' => $wxUser['headimgurl'], 
+            'fullname'   => $request->get('name'), 
+            'number'     => $request->get('number'), 
+            'has_drawn'  => false
+          ];
+
+          $this->party->fill($userData);
+
+          $this->party->save();          
+        }
+
+        return view('register.success', ['user' => $userData]);
     }
 }
