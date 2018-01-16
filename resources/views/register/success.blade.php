@@ -15,10 +15,10 @@
 <body>
     <div class="register-bg">
         <div class="logo">
-            <img src="images/logo.png" alt="BenQ">
+            <img src="/images/logo.png" alt="BenQ">
         </div>
         <div class="content">
-            <img src="{{ $user['avatar'] }}" class="avatar">
+            <img src="{{ $user['headimgurl'] }}" class="avatar">
             <h1>{{ $user['fullname'] }}</h1>
             <p>欢迎参加2018年部门年会。</p>
             <p>您已进入抽奖池，祝您好运。</p>
