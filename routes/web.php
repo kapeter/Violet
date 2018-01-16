@@ -18,6 +18,6 @@ Route::get('/', function () {
 Route::any('/wechat', 'WechatController@serve');
 
 Route::group(['middleware' => ['wechat.oauth:snsapi_userinfo']], function () {
-    Route::get('/register', 'RegisterController@index');
-    Route::post('/register', 'RegisterController@store');
+    Route::get('/wechat/register', 'RegisterController@index');
+    Route::post('/wechat/register', 'RegisterController@store');
 });
