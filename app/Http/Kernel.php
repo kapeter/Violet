@@ -36,7 +36,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
 
-            // 开发用
+            // 生成测试数据
             // \App\Http\Middleware\GenerateUser::class
         ],
 

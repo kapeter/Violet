@@ -46,9 +46,9 @@ class RegisterController extends Controller
 
         if (!$userData){
           $userData = [
-            'openid'     => $wxUser['openid'],
+            'openid'     => $wxUser['id'],
             'nickname'   => $wxUser['nickname'], 
-            'headimgurl' => $wxUser['headimgurl'], 
+            'headimgurl' => $wxUser['avatar'], 
             'fullname'   => $request->get('name'), 
             'number'     => $request->get('number'), 
             'has_drawn'  => false

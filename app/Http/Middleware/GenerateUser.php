@@ -23,10 +23,10 @@ class GenerateUser
             'headimgurl' => 'https://www.kapeter.com/_nuxt/img/avatar.f936fc0.jpg'
         ];
         $user = new SocialiteUser([
-            'openid' => array_get($user, 'openid'),
+            'id' => array_get($user, 'openid'),
             'name' => array_get($user, 'nickname'),
             'nickname' => array_get($user, 'nickname'),
-            'headimgurl' => array_get($user, 'headimgurl'),
+            'avatar' => array_get($user, 'headimgurl'),
             'email' => null,
             'original' => [],
             'provider' => 'WeChat',
