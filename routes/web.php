@@ -25,3 +25,9 @@ Route::group(['middleware' => ['wechat.oauth:snsapi_userinfo']], function () {
 Route::get('/garden', function () {
     return view('garden');
 });
+
+Route::group(['prefix' => 'api'], function () {
+	Route::get('/garden', 'GardenController@index');
+	Route::post('/garden', 'GardenController@update');
+	Route::post('/garden/reset', 'GardenController@reset');
+});

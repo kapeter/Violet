@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Overtrue\Socialite\User as SocialiteUser;
 
 class WechatController extends Controller
 {
