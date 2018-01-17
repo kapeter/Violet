@@ -26,14 +26,62 @@ class GardenController extends Controller
     }
 
 
-    public function update()
+    public function update(Request $request)
     {
-    	# code...
+        // 生成随机数列
+        $baseList = $this->party->where('has_drawn', false)->get();
+
+        $len = sizeof($baseList);
+        $chaos = [];
+        $randArr = [];
+        for ($i = 0; $i < $len; $i++) {
+            $r = rand(0, $len - 1);
+            while(in_array($r, $randArr)){
+                $r = rand(0, $len - 1);
+            }
+            array_push($chaos, $baseList[$r]);
+            array_push($randArr, $r);
+        }
+
+        // 随机获取获奖用户
+        $count = $request->get('count');
+        $randArr = [];
+        $result = [];
+        for ($i = 0; $i < $count; $i++) {
+            $r = rand(0, $len - 1);
+            $data = $chaos[$r]->toArray();
+            $temp = false;
+            while(!$temp){
+                $model = $this->party->find($data['id']);
+                if ($model->has_drawn){
+                    $r = rand(0, $len - 1);
+                    $data = $chaos[$r]->toArray(); 
+                }else{
+                    $temp = true;
+                    $data['has_drawn'] = true;
+                    $model->fill($data);
+                    $model->save();
+                }
+                
+            }
+            array_push($result, $data);
+        }
+
+        return $result;
+
     }
 
 
     public function reset()
     {
-    	# code...
+    	$this->party->where('has_drawn', true)->update(['has_drawn' => false]);
+
+        $baseList = $this->party->where('has_drawn', false)->get();
+        $goalList = $this->party->where('has_drawn', true)->get();
+
+        return response()->json([
+            'baseList' => $baseList,
+            'goalList' => $goalList
+        ]);
     }
 }

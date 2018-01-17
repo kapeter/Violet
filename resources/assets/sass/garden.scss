@@ -41,11 +41,11 @@
 
 @font-face {
   font-family: 'iconfont';  /* project id 544291 */
-  src: url('//at.alicdn.com/t/font_544291_q100uiuw4r8gp66r.eot');
-  src: url('//at.alicdn.com/t/font_544291_q100uiuw4r8gp66r.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_544291_q100uiuw4r8gp66r.woff') format('woff'),
-  url('//at.alicdn.com/t/font_544291_q100uiuw4r8gp66r.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_544291_q100uiuw4r8gp66r.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_544291_7fl5nsgsbk5ipb9.eot');
+  src: url('//at.alicdn.com/t/font_544291_7fl5nsgsbk5ipb9.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_544291_7fl5nsgsbk5ipb9.woff') format('woff'),
+  url('//at.alicdn.com/t/font_544291_7fl5nsgsbk5ipb9.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_544291_7fl5nsgsbk5ipb9.svg#iconfont') format('svg');
 }
 
 .iconfont{
@@ -94,12 +94,7 @@ ul, ol ,li{
 .full-bg{
 	width: 100%;
 	height: 100%;
-	padding: 30px 150px;
 	position: relative;
-	color: #fff;
-	box-sizing: border-box;
-	display: flex;
-	flex-direction: column;
 }
 .video-box{
 	width: 100%;
@@ -111,6 +106,67 @@ ul, ol ,li{
 	video {
 		width: 100%;
 	}
+}
+.lock-box{
+	position: absolute;
+	left: 50%;
+	top: 45%;
+	transform: translate(-50%, -50%);
+	width: 1024px;
+	text-align: center;
+	.title{
+		font-size: 64px;
+		color: $active-color;
+		text-transform: uppercase;
+		font-style: italic;		
+		text-shadow: 0px 0px 15px #e4f26d;
+	}
+	.form{
+		width: 540px;
+		margin: 60px auto;
+		position: relative;
+		.form-control{
+			width: 100%;
+			box-sizing: border-box;
+			padding: 15px 30px;
+			font-size: 20px;
+			font-weight: normal;
+			color: #999;
+			background-color: #fff;
+			border-radius: 60px;
+			border: 0;
+			outline: 0;
+		}
+		.btn{
+			position: absolute;
+			right: 30px;
+			top: 5px;
+			.iconfont{
+				color: #999;
+				font-size: 36px;
+				transition: all .25s linear;
+				&:hover{
+					color: $active-color;
+				}
+			}
+		}
+		.error-text{
+			margin-top: 15px;
+			font-size: 18px;
+			color: #ed4630;
+		}
+	}
+}
+
+.main{
+	width: 100%;
+	height: 100%;
+	padding: 30px 150px;
+	position: relative;
+	color: #fff;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;	
 }
 
 .header{
@@ -127,6 +183,8 @@ ul, ol ,li{
 			line-height: 1.2;
 			color: $active-color;
 			text-transform: uppercase;
+			font-style: italic;
+		    text-shadow: 0px 0px 15px #e4f26d;
 		}
 		.num{
 			line-height: 2;
@@ -301,4 +359,100 @@ ul, ol ,li{
 		}
 	}
 
+}
+.modal-warper{
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	overflow: hidden;
+	z-index: 2000;
+	.modal{
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		width: 540px;
+		min-height: 280px;
+		background-color: rgba(0, 0, 0, 0.9);
+		color: #fff;
+		box-shadow: 0px 0px 60px 0px #39c5bb inset;
+		.close{
+			position: absolute;
+			right: 15px;
+			top: 10px;
+			display: block;
+			color: #ccc;
+			transition: all 0.25s linear;
+			.iconfont{
+				font-size: 36px;
+			}
+			&:hover{
+				transform-origin: center;
+				transform: rotate(180deg);
+				color: $active-color;
+			}
+		}
+		.modal-content{
+			padding: 60px; 
+			font-size: 17px;
+		}
+		.modal-footer{
+			text-align: center;
+			.modal-btn{
+			    display: inline-block;
+			    padding: 7px 45px;
+			    margin: 10px;
+			    border: 1px solid #666;
+			    border-radius: 30px;
+			    transition: all 0.25s linear;
+			    &:hover{
+			    	background-color: $active-color;
+			    	color: #39c5bb;
+			    }
+			}
+		}
+	}
+}
+
+.list-box{
+	width: 50%;
+	height: 100%;
+	float: left;
+	padding: 0px 30px;
+	box-sizing: border-box;
+	overflow-y: auto;
+	.table{
+		width: 100%;
+		text-align: center;
+		border-collapse:collapse;
+		caption{
+			font-size: 40px;
+			margin-bottom: 30px;
+			color: $active-color;
+		}
+		thead{
+			padding-bottom: 15px;
+			border-bottom: 1px solid $active-color;
+		}
+		tr{
+			td{
+				padding: 10px 0;
+				font-size: 24px;
+				vertical-align: middle;
+				img{
+					width: 64px;
+					height: 64px;
+					border-radius: 50%;
+					border: 1px solid $active-color;
+				}
+			}
+			th{
+				padding: 10px;
+				font-size: 28px;
+				font-weight: bold;
+			}
+		}
+	}
 }

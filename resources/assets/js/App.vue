@@ -5,90 +5,165 @@
 				您的浏览器不支持 video 标签。
 			</video>
 		</div>
-		<header class="header">
-			<div>
-				<img src="/images/logo.png" class="logo">
-			</div>
-			<div>
-				<h1 class="title">Violet System</h1>
-			</div>
-			<div>
-				<h1 class="num">当前抽奖池：{{ baseList.length }}人</h1>
-			</div>
-		</header>
-		<div class="content" id="content">
-			<div class="user-box" :style="{ height: userHeight + 'px' }" v-if="goalStatus == 0">
-				<ul class="user-list">
-					<li v-for="user in baseList">
-						<div class="avatar">
-							<img :src="user.headimgurl" :alt="user.nickname">
-						</div>
-						<p>{{ user.fullname }}</p>
-					</li>
-				</ul>
-			</div>
-			<div class="goal-box" v-else>
-				<ul class="goal-list">
-					<li v-for="user in activeList" :style="{ 'margin-top': goalMargin + 'px' }">
-						<div class="avatar" :style="{ height: avatarContent + 'px', width: avatarContent + 'px' }">
-							<img :src="user.headimgurl" :alt="user.nickname">
-						</div>
-						<p>{{ user.fullname }}</p>
-					</li>
-				</ul>
+		<div v-if="is_locked">
+			<div class="lock-box">
+				<h1 class="title">Welcome To Violet System</h1>
+				<form class="form" @submit.prevent="checkPwd()">
+					<input type="password" name="password" class="form-control" placeholder="请输入解锁密码" v-model="lockPwd" @keyup.enter="submit">
+					<a href="javascript:;" class="btn" @click="checkPwd()"><i class="iconfont">&#xe9d0;</i></a>
+					<p class="error-text" v-if="errorText != ''">{{ errorText }}</p>
+				</form>
 			</div>
 		</div>
-		<footer class="footer">
-			<div class="copyright">
-				<img src="/images/mylogo.png" alt="kapeter">
-				<p>技术支持</p>
+		<div v-else class="main">
+			<!-- 页面头部 -->
+			<header class="header">
+				<div>
+					<img src="/images/logo.png" class="logo">
+				</div>
+				<div>
+					<h1 class="title">Violet System</h1>
+				</div>
+				<div>
+					<h1 class="num">当前抽奖池：{{ baseList.length }}人</h1>
+				</div>
+			</header>
+			<!-- 内容区 -->
+			<div class="content" id="content">
+				<div v-if="!listVisiable">
+					<div class="user-box" :style="{ height: userHeight + 'px' }" v-if="goalStatus == 0">
+						<ul class="user-list">
+							<li v-for="user in baseList">
+								<div class="avatar">
+									<img :src="user.headimgurl" :alt="user.nickname">
+								</div>
+								<p>{{ user.fullname }}</p>
+							</li>
+						</ul>
+					</div>
+					<div class="goal-box" v-else>
+						<ul class="goal-list">
+							<li v-for="user in activeList" :style="{ 'margin-top': goalMargin + 'px' }">
+								<div class="avatar" :style="{ height: avatarContent + 'px', width: avatarContent + 'px' }">
+									<img :src="user.headimgurl" :alt="user.nickname">
+								</div>
+								<p>{{ user.fullname }}</p>
+							</li>
+						</ul>
+					</div>				
+				</div>
+				<div class="clearfix" v-else style="height: 100%">
+					<div class="list-box">
+						<table class="table">
+							<caption>抽奖池名单</caption>
+							<thead>
+								<tr>
+									<th>头像</th>
+									<th>姓名</th>
+									<th>员工工号</th>
+								</tr>							
+							</thead>
+							<tbody>
+								<tr v-for="user in baseList">
+									<td><img :src="user.headimgurl" :alt="user.nickname"></td>
+									<td>{{ user.fullname }}</td>
+									<td>{{ user.number }}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="list-box">
+						<table class="table">
+							<caption>已中奖名单</caption>
+							<thead>
+								<tr>
+									<th>头像</th>
+									<th>姓名</th>
+									<th>员工工号</th>
+								</tr>							
+							</thead>
+							<tbody>
+								<tr v-for="user in goalList">
+									<td><img :src="user.headimgurl" :alt="user.nickname"></td>
+									<td>{{ user.fullname }}</td>
+									<td>{{ user.number }}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
-			<div class="operation">
-				<ul class="operation-list clearfix">
-					<li class="adder">
-						<a href="javascript:;" @click="reduceNum()" :class="{disabled: isOne || goalStatus != 0}">
-							<i class="iconfont">&#xe9af;</i>
-						</a>
-					</li>
-					<li>
-						<button class="btn" @click="doGoal()">{{ btnText }}</button>
-					</li>
-					<li class="adder">
-						<a href="javascript:;" @click="addNum()" :class="{disabled: isFive || goalStatus != 0}">
-							<i class="iconfont">&#xe985;</i>
-						</a>
-					</li>
-				</ul>
-			</div>
-			<nav class="nav">
-				<ul class="nav-list">
-					<li>
-						<a href="javascript:;">
-							<div class="circle">
-								<i class="iconfont">&#xe9ad;</i>
-							</div>
-							锁定页面
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-							<div class="circle">
-								<i class="iconfont">&#xe9cd;</i>
-							</div>
-							重置奖池
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-							<div class="circle">
-								<i class="iconfont">&#xe9b4;</i>
-							</div>
-							查看列表
-						</a>
-					</li>
-				</ul>
-			</nav>
-		</footer>
+			<!-- 页面底部 -->
+			<footer class="footer">
+				<div class="copyright">
+					<img src="/images/mylogo.png" alt="kapeter">
+					<p>技术支持</p>
+				</div>
+				<div class="operation">
+					<ul class="operation-list clearfix">
+						<li class="adder">
+							<a href="javascript:;" @click="reduceNum()" :class="{disabled: isOne || goalStatus != 0}">
+								<i class="iconfont">&#xe9af;</i>
+							</a>
+						</li>
+						<li>
+							<button class="btn" @click="doGoal()">{{ btnText }}</button>
+						</li>
+						<li class="adder">
+							<a href="javascript:;" @click="addNum()" :class="{disabled: isFive || goalStatus != 0}">
+								<i class="iconfont">&#xe985;</i>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<nav class="nav">
+					<ul class="nav-list">
+						<li>
+							<a href="javascript:;">
+								<div class="circle" @click="is_locked = true">
+									<i class="iconfont">&#xe9ad;</i>
+								</div>
+								锁定页面
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;" @click="modalVisiable = true">
+								<div class="circle">
+									<i class="iconfont">&#xe9cd;</i>
+								</div>
+								重置奖池
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;" @click="toggleList()">
+								<div class="circle">
+									<i class="iconfont">&#xe9b4;</i>
+								</div>
+								查看列表
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</footer>			
+		</div>
+		<div class="modal-warper" v-if="modalVisiable">
+			<div class="modal">
+				<a href="javascript:;" class="close" @click="modalVisiable = false">
+					<i class="iconfont">&#xe990;</i>
+				</a>
+				<div class="modal-content">
+					重置奖池，意味着所有中过奖的用户将重新回到抽奖池。是否确认重置奖池？
+				</div>
+				<div class="modal-footer">
+					<a href="javascript:;" class="modal-btn" @click="reset()">
+						确 认
+					</a>
+					<a href="javascript:;" class="modal-btn" @click="modalVisiable = false">
+						取 消
+					</a>				
+				</div>
+			</div>			
+		</div>
 	</div>
 </template>
 
@@ -96,18 +171,23 @@
 	export default {
 		data() {
 			return {
-				baseList: [],     // 抽奖池
-				goalList: [],     // 已中奖名单
-				activeList:[],    // 抽奖中的名单
-				userHeight: 0,    // 用户列表高度
-				goalNum: 1,       // 单次抽奖人数
-				isOne: true,      // 最低单次抽一人
-				isFive: false,    // 最高单次抽5人
-				goalStatus: 0,       // 是否正在抽奖, 0为未抽奖，1为抽奖中，2为停止抽奖
-				btnText: '1连抽',      
-				avatarContent: 0,
-				goalMargin: 0,
-				timer: null, 
+				baseList: [],         // 抽奖池
+				goalList: [],         // 已中奖名单
+				activeList:[],        // 抽奖中的名单
+				userHeight: 0,        // 用户列表高度
+				goalNum: 1,           // 单次抽奖人数
+				isOne: true,          // 最低单次抽一人
+				isFive: false,        // 最高单次抽5人
+				goalStatus: 0,        // 是否正在抽奖, 0为未抽奖，1为抽奖中，2为停止抽奖, 3呈现列表
+				btnText: '1连抽',     //  按钮文本
+				avatarContent: 0,     // 抽奖头像尺寸
+				goalMargin: 0,        // 抽奖头像margin-top
+				timer: null,          // 全局定时器
+				modalVisiable: false, // 模态框是否可见
+				listVisiable: false,  // 列表是否可见
+				is_locked: true,      // 是否锁定页面
+				lockPwd: '',          // 解锁密码
+				errorText: ''         // 输入密码时的错误文本
 			}
 		},
 		mounted() {
@@ -117,6 +197,7 @@
 			baseList (val) {
 				this.userHeight = Math.ceil(val.length / 9) * 195;
 			},
+			// 改变按钮文本
 			goalStatus (val) {
 				switch (val) {
 					case 0:
@@ -128,13 +209,17 @@
 					case 2:
 						this.btnText = '确认名单';
 						break;
+					case 3:
+						this.btnText = '关闭列表';
 				}
 			},
+			// 改变按钮文本
 			goalNum (val){
 				this.btnText = val + '连抽';
 			}
 		},
 		methods: {
+			// 载入基础数据
 			loadListData() {
 				let _self = this;
 				axios.get('/api/garden')
@@ -144,18 +229,22 @@
 						_self.baseCount = _self.baseList.length;
 					})
 			},
+			// 减少单次抽奖人数
 			reduceNum() {
 				if (this.goalNum > 1){
 					this.goalNum--;
 					this.isFive = false;
+					if (this.goalNum == 1) this.isOne = true
 				}else{
 					this.isOne = true;
 				}
 			},
+			// 增加单次抽奖人数
 			addNum() {
 				if (this.goalNum < 5){
 					this.goalNum++;
 					this.isOne = false;
+					if (this.goalNum == 5) this.isFive = true
 				}else{
 					this.isFive = true;
 				}
@@ -172,9 +261,13 @@
 					case 2:
 						this.finish();
 						break;
+					case 3:
+						this.listVisiable = false;
+						this.goalStatus = 0;
+						break;
 				}
-			
 			},
+			// 开始抽奖，抽奖动画
 			start() {
 				let _self = this;
 				let len = _self.goalNum;
@@ -204,15 +297,58 @@
 					}			
 				},60);
 			},
+			// 提交数据，获得真正的获奖用户，动画停止
 			stop() {
 				let _self = this;
 				_self.goalStatus = 2; 
+				axios.post('/api/garden', { count: _self.goalNum })
+					.then(function(res){
+						clearInterval(_self.timer);
+						for (let i = 0; i < _self.goalNum; i++){
+							_self.activeList.splice(i, 1, res.data[i]);
+						}							
+					});
 			},
+			// 抽奖结束，回到列表
 			finish() {
 				let _self = this;
 				_self.goalStatus = 0; 
+				_self.loadListData();
+			},
+			// 重置抽奖池
+			reset() {
+				let _self = this;
+				axios.post('/api/garden/reset')
+					.then(function (res) {
+						_self.baseList = res.data.baseList;
+						_self.goalList = res.data.goalList;
+						_self.baseCount = _self.baseList.length;
+						_self.modalVisiable = false;
+					})
+			},
+			// 控制列表显示
+			toggleList() {
+				if (this.listVisiable){
+					this.listVisiable = false;
+					this.goalStatus = 0;
+				}else{
+					this.listVisiable = true;
+					this.goalStatus = 3;
+				}
+			},
+			// 检查解锁密码，如果密码正确，进入主页面
+			checkPwd() {
+				if (this.lockPwd == ''){
+					this.errorText = "解锁密码不能为空!";
+					return false;
+				}
+				if (this.lockPwd == 'benq2018'){
+					this.is_locked = false;
+					this.lockPwd = '';
+				}else{
+					this.errorText = "解锁密码错误!";
+				}
 			}
-
 		}
 	}
 </script>
