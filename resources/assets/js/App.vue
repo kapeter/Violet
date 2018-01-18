@@ -189,7 +189,8 @@
 				listVisiable: false,  // 列表是否可见
 				is_locked: true,      // 是否锁定页面
 				lockPwd: '',          // 解锁密码
-				errorText: ''         // 输入密码时的错误文本
+				errorText: '',        // 输入密码时的错误文本
+				speed: 30,            // 定时器初始速度
 			}
 		},
 		mounted() {
@@ -310,13 +311,18 @@
 			stop() {
 				let _self = this;
 				_self.goalStatus = 2; 
+				clearInterval(_self.timer);
+				_self.setTimer();
 				axios.post('/api/garden', { count: _self.goalNum })
 					.then(function(res){
-						clearInterval(_self.timer);
-						for (let i = 0; i < _self.goalNum; i++){
-							_self.activeList.splice(i, 1, res.data[i]);
-						}
-						_self.loadListData();							
+						setTimeout(() => {
+							clearTimeout(_self.timer);
+							_self.speed = 30;
+							for (let i = 0; i < _self.goalNum; i++){
+								_self.activeList.splice(i, 1, res.data[i]);
+							}
+							_self.loadListData();
+						}, 2000);							
 					});
 			},
 			// 抽奖结束，回到列表
@@ -324,6 +330,19 @@
 				let _self = this;
 				_self.goalStatus = 0; 
 				_self.goalNum = 1;
+			},
+			setTimer() {
+				let _self = this
+				let len = _self.goalNum;
+				let sum = _self.baseList.length;
+				_self.speed += 15;
+				_self.timer = setTimeout(() => {
+					for (let i = 0; i < len; i++){
+						let r = Math.floor(Math.random() * sum);  // 随机数
+						_self.activeList.splice(i, 1, _self.baseList[r]);
+					}			
+					_self.setTimer();		
+				},_self.speed);
 			},
 			// 重置抽奖池
 			reset() {
