@@ -7,13 +7,14 @@
 		</div>
 		<div v-if="is_locked">
 			<div class="lock-box">
-				<h1 class="title">Welcome To Violet System</h1>
+				<h1 class="title">Welcome To PMSC 2017 Workshop Dinner</h1>
 				<form class="form" @submit.prevent="checkPwd()">
 					<input type="password" name="password" class="form-control" placeholder="请输入解锁密码" v-model="lockPwd" @keyup.enter="submit">
-					<a href="javascript:;" class="btn" @click="checkPwd()"><i class="iconfont">&#xe9d0;</i></a>
+					<button class="btn" @click="checkPwd()"><i class="iconfont">&#xe9d0;</i></button>
 					<p class="error-text" v-if="errorText != ''">{{ errorText }}</p>
 				</form>
 				<img src="/images/qcode.jpg" alt="二维码">
+				<p>微信扫描二维码，进入抽奖池</p>
 			</div>
 		</div>
 		<div v-else class="main">
@@ -23,7 +24,7 @@
 					<img src="/images/logo.png" class="logo">
 				</div>
 				<div>
-					<h1 class="title">Violet System</h1>
+					<h1 class="title">PMSC 2017 Workshop Dinner</h1>
 				</div>
 				<div>
 					<h1 class="num">当前抽奖池：{{ baseList.length }}人</h1>
@@ -103,45 +104,45 @@
 				<div class="operation">
 					<ul class="operation-list clearfix">
 						<li class="adder">
-							<a href="javascript:;" @click="reduceNum()" :class="{disabled: isOne || goalStatus != 0}">
+							<button @click="reduceNum()" :class="{disabled: isOne || goalStatus != 0}">
 								<i class="iconfont">&#xe9af;</i>
-							</a>
+							</button>
 						</li>
 						<li>
 							<button class="btn" @click="doGoal()">{{ btnText }}</button>
 						</li>
 						<li class="adder">
-							<a href="javascript:;" @click="addNum()" :class="{disabled: isFive || goalStatus != 0}">
+							<button @click="addNum()" :class="{disabled: isFive || goalStatus != 0}">
 								<i class="iconfont">&#xe985;</i>
-							</a>
+							</button>
 						</li>
 					</ul>
 				</div>
 				<nav class="nav">
 					<ul class="nav-list">
 						<li>
-							<a href="javascript:;">
-								<div class="circle" @click="is_locked = true">
+							<button @click="returnLocked()">
+								<div class="circle">
 									<i class="iconfont">&#xe9ad;</i>
 								</div>
 								锁定页面
-							</a>
+							</button>
 						</li>
 						<li>
-							<a href="javascript:;" @click="modalVisiable = true">
+							<button @click="modalVisiable = true">
 								<div class="circle">
 									<i class="iconfont">&#xe9cd;</i>
 								</div>
 								重置奖池
-							</a>
+							</button>
 						</li>
 						<li>
-							<a href="javascript:;" @click="toggleList()">
+							<button @click="toggleList()">
 								<div class="circle">
 									<i class="iconfont">&#xe9b4;</i>
 								</div>
 								查看列表
-							</a>
+							</button>
 						</li>
 					</ul>
 				</nav>
@@ -149,19 +150,19 @@
 		</div>
 		<div class="modal-warper" v-if="modalVisiable">
 			<div class="modal">
-				<a href="javascript:;" class="close" @click="modalVisiable = false">
+				<button class="close" @click="modalVisiable = false">
 					<i class="iconfont">&#xe990;</i>
-				</a>
+				</button>
 				<div class="modal-content">
 					重置奖池，意味着所有中过奖的用户将重新回到抽奖池。是否确认重置奖池？
 				</div>
 				<div class="modal-footer">
-					<a href="javascript:;" class="modal-btn" @click="reset()">
+					<button class="modal-btn" @click="reset()">
 						确 认
-					</a>
-					<a href="javascript:;" class="modal-btn" @click="modalVisiable = false">
+					</button>
+					<button class="modal-btn" @click="modalVisiable = false">
 						取 消
-					</a>				
+					</button>				
 				</div>
 			</div>			
 		</div>
@@ -196,12 +197,13 @@
 		},
 		watch: {
 			baseList (val) {
-				this.userHeight = Math.ceil(val.length / 9) * 195;
+				this.userHeight = Math.ceil(val.length / 8) * 195;
 			},
 			// 改变按钮文本
 			goalStatus (val) {
 				switch (val) {
 					case 0:
+						this.goalNum = 1;
 						this.btnText = this.goalNum + '连抽';
 						break;
 					case 1:
@@ -212,11 +214,20 @@
 						break;
 					case 3:
 						this.btnText = '关闭列表';
+						
 				}
 			},
 			// 改变按钮文本
 			goalNum (val){
 				this.btnText = val + '连抽';
+				if (val == 5) {
+					this.isFive = true;
+					this.isOne = false;
+				}
+				if (val == 1) {
+					this.isOne = true;
+					this.isFive = false;
+				}
 			}
 		},
 		methods: {
@@ -227,7 +238,6 @@
 					.then(function (res) {
 						_self.baseList = res.data.baseList;
 						_self.goalList = res.data.goalList;
-						_self.baseCount = _self.baseList.length;
 					})
 			},
 			// 减少单次抽奖人数
@@ -235,7 +245,6 @@
 				if (this.goalNum > 1){
 					this.goalNum--;
 					this.isFive = false;
-					if (this.goalNum == 1) this.isOne = true
 				}else{
 					this.isOne = true;
 				}
@@ -245,7 +254,6 @@
 				if (this.goalNum < 5){
 					this.goalNum++;
 					this.isOne = false;
-					if (this.goalNum == 5) this.isFive = true
 				}else{
 					this.isFive = true;
 				}
@@ -307,14 +315,15 @@
 						clearInterval(_self.timer);
 						for (let i = 0; i < _self.goalNum; i++){
 							_self.activeList.splice(i, 1, res.data[i]);
-						}							
+						}
+						_self.loadListData();							
 					});
 			},
 			// 抽奖结束，回到列表
 			finish() {
 				let _self = this;
 				_self.goalStatus = 0; 
-				_self.loadListData();
+				_self.goalNum = 1;
 			},
 			// 重置抽奖池
 			reset() {
@@ -323,7 +332,6 @@
 					.then(function (res) {
 						_self.baseList = res.data.baseList;
 						_self.goalList = res.data.goalList;
-						_self.baseCount = _self.baseList.length;
 						_self.modalVisiable = false;
 					})
 			},
@@ -337,6 +345,11 @@
 					this.goalStatus = 3;
 				}
 			},
+			returnLocked() {
+				this.lockPwd = '';
+				this.errorText = '';
+				this.is_locked = true;
+			},
 			// 检查解锁密码，如果密码正确，进入主页面
 			checkPwd() {
 				if (this.lockPwd == ''){
@@ -345,7 +358,6 @@
 				}
 				if (this.lockPwd == 'benq2018'){
 					this.is_locked = false;
-					this.lockPwd = '';
 				}else{
 					this.errorText = "解锁密码错误!";
 				}

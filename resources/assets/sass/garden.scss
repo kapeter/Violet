@@ -85,6 +85,17 @@ a:hover{
 ul, ol ,li{
 	list-style: none;
 }
+button{
+	border: 0;
+    background-color: transparent;
+    transition: all .25s linear;
+    outline: 0;
+    cursor: pointer;
+    color: #fff;
+}
+button:hover{
+	color: $active-color;
+}
 .clearfix:after{
 	content: '';
 	display: block;
@@ -104,18 +115,20 @@ ul, ol ,li{
 	top: 0;
 	z-index: -1;
 	video {
-		width: 100%;
+		min-width: 100%;
+		min-height: 100%;
 	}
 }
 .lock-box{
 	position: absolute;
 	left: 50%;
-	top: 45%;
+	top: 50%;
 	transform: translate(-50%, -50%);
-	width: 1024px;
+	width: 1200px;
 	text-align: center;
+	color: #fff;
 	.title{
-		font-size: 64px;
+		font-size: 54px;
 		color: $active-color;
 		text-transform: uppercase;
 		font-style: italic;		
@@ -131,7 +144,7 @@ ul, ol ,li{
 			padding: 15px 30px;
 			font-size: 20px;
 			font-weight: normal;
-			color: #999;
+			color: #666;
 			background-color: #fff;
 			border-radius: 60px;
 			border: 0;
@@ -142,7 +155,7 @@ ul, ol ,li{
 			right: 30px;
 			top: 5px;
 			.iconfont{
-				color: #999;
+				color: #666;
 				font-size: 36px;
 				transition: all .25s linear;
 				&:hover{
@@ -179,8 +192,7 @@ ul, ol ,li{
 		width: 0;
 		.title{
 			text-align: center;
-			font-size: 48px;
-			line-height: 1.2;
+			font-size: 36px;
 			color: $active-color;
 			text-transform: uppercase;
 			font-style: italic;
@@ -314,10 +326,16 @@ ul, ol ,li{
 			}
 			.adder{
 				width: 60px;
-				.iconfont{
-					font-size: 36px;
-					font-weight: bold;
-				}	
+				button{
+					padding-top: 30px;
+					.iconfont{
+						font-size: 36px;
+						font-weight: bold;
+					}
+					&:hover{
+						color: $active-color;
+					}	
+				}
 				.disabled{
 					opacity: 0;
 				}
@@ -333,7 +351,7 @@ ul, ol ,li{
 				float: right;
 				text-align: center;
 				padding: 0 30px;
-				a{
+				button{
 					transition: all 0.25s ease-out;
 					.circle{
 						width: 64px;
