@@ -13,6 +13,7 @@
 					<a href="javascript:;" class="btn" @click="checkPwd()"><i class="iconfont">&#xe9d0;</i></a>
 					<p class="error-text" v-if="errorText != ''">{{ errorText }}</p>
 				</form>
+				<img src="/images/qcode.jpg" alt="二维码">
 			</div>
 		</div>
 		<div v-else class="main">
