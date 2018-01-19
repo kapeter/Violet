@@ -109,7 +109,7 @@
 							</button>
 						</li>
 						<li>
-							<button class="btn" @click="doGoal()">{{ btnText }}</button>
+							<button class="btn" @click="doGoal()" :class="{ 'btn-disabled': goalStatus == -1 }">{{ btnText }}</button>
 						</li>
 						<li class="adder">
 							<button @click="addNum()" :class="{disabled: isFive || goalStatus != 0}">
@@ -180,7 +180,7 @@
 				goalNum: 1,           // 单次抽奖人数
 				isOne: true,          // 最低单次抽一人
 				isFive: false,        // 最高单次抽5人
-				goalStatus: 0,        // 是否正在抽奖, 0为未抽奖，1为抽奖中，2为停止抽奖, 3呈现列表
+				goalStatus: 0,        // 是否正在抽奖, 0为未抽奖，1为抽奖中，2为停止抽奖, 3呈现界面, -1为不可使用
 				btnText: '1连抽',     //  按钮文本
 				avatarContent: 0,     // 抽奖头像尺寸
 				goalMargin: 0,        // 抽奖头像margin-top
@@ -211,7 +211,7 @@
 						this.btnText = '停止抽奖';
 						break;
 					case 2:
-						this.btnText = '确认名单';
+						this.btnText = '返回界面';
 						break;
 					case 3:
 						this.btnText = '关闭列表';
@@ -221,13 +221,13 @@
 			// 改变按钮文本
 			goalNum (val){
 				this.btnText = val + '连抽';
+				this.isFive = false;
+				this.isOne = false;
 				if (val == 5) {
 					this.isFive = true;
-					this.isOne = false;
 				}
 				if (val == 1) {
 					this.isOne = true;
-					this.isFive = false;
 				}
 			}
 		},
@@ -245,23 +245,20 @@
 			reduceNum() {
 				if (this.goalNum > 1){
 					this.goalNum--;
-					this.isFive = false;
-				}else{
-					this.isOne = true;
 				}
 			},
 			// 增加单次抽奖人数
 			addNum() {
 				if (this.goalNum < 5){
 					this.goalNum++;
-					this.isOne = false;
-				}else{
-					this.isFive = true;
 				}
 			},
 			// 开启抽奖
 			doGoal() {
 				switch (this.goalStatus) {
+					case -1:
+						return false
+						break;
 					case 0:
 						this.start();
 						break;
@@ -310,7 +307,7 @@
 			// 提交数据，获得真正的获奖用户，动画停止
 			stop() {
 				let _self = this;
-				_self.goalStatus = 2; 
+				_self.goalStatus = -1; 
 				clearInterval(_self.timer);
 				_self.setTimer();
 				axios.post('/api/garden', { count: _self.goalNum })
@@ -322,15 +319,11 @@
 								_self.activeList.splice(i, 1, res.data[i]);
 							}
 							_self.loadListData();
-						}, 2000);							
+							_self.goalStatus = 2; 
+						}, 1500);							
 					});
 			},
-			// 抽奖结束，回到列表
-			finish() {
-				let _self = this;
-				_self.goalStatus = 0; 
-				_self.goalNum = 1;
-			},
+			// 确定名单后的减速动画
 			setTimer() {
 				let _self = this
 				let len = _self.goalNum;
@@ -343,6 +336,12 @@
 					}			
 					_self.setTimer();		
 				},_self.speed);
+			},
+			// 抽奖结束，回到列表
+			finish() {
+				let _self = this;
+				_self.goalStatus = 0; 
+				_self.goalNum = 1;
 			},
 			// 重置抽奖池
 			reset() {
@@ -364,6 +363,7 @@
 					this.goalStatus = 3;
 				}
 			},
+			// 返回锁屏界面
 			returnLocked() {
 				this.lockPwd = '';
 				this.errorText = '';

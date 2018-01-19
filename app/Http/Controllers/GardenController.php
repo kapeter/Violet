@@ -17,7 +17,7 @@ class GardenController extends Controller
     public function index()
     {
     	$baseList = $this->party->where('has_drawn', false)->get();
-    	$goalList = $this->party->where('has_drawn', true)->get();
+    	$goalList = $this->party->where('has_drawn', true)->latest('updated_at')->get();
 
 		return response()->json([
 			'baseList' => $baseList,
@@ -28,9 +28,9 @@ class GardenController extends Controller
 
     public function update(Request $request)
     {
-        // 生成随机数列
+        
         $baseList = $this->party->where('has_drawn', false)->get();
-
+        // 生成随机数列
         $len = sizeof($baseList);
         $chaos = [];
         $randArr = [];
@@ -45,7 +45,6 @@ class GardenController extends Controller
 
         // 随机获取获奖用户
         $count = $request->get('count');
-        $randArr = [];
         $result = [];
         for ($i = 0; $i < $count; $i++) {
             $r = rand(0, $len - 1);
