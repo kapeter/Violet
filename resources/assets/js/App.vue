@@ -1,19 +1,19 @@
 <template>
 	<div class="full-bg">
 		<div class="video-box">
-			<video src="/media/bg.mp4" autoplay="autoplay" loop="loop">
+			<video :src="config.bgUrl" autoplay="autoplay" loop="loop">
 				您的浏览器不支持 video 标签。
 			</video>
 		</div>
 		<div v-if="is_locked">
 			<div class="lock-box">
-				<h1 class="title">Welcome To PMSC 2017 Workshop Dinner</h1>
+				<h1 class="title">Welcome To {{ config.name }}</h1>
 				<form class="form" @submit.prevent="checkPwd()">
 					<input type="password" name="password" class="form-control" placeholder="请输入解锁密码" v-model="lockPwd" @keyup.enter="submit">
 					<button class="btn" @click="checkPwd()"><i class="iconfont">&#xe9d0;</i></button>
 					<p class="error-text" v-if="errorText != ''">{{ errorText }}</p>
 				</form>
-				<img src="/images/qcode.jpg" alt="二维码">
+				<img :src="config.codeUrl" alt="二维码">
 				<p>微信扫描二维码，进入抽奖池</p>
 			</div>
 		</div>
@@ -21,10 +21,10 @@
 			<!-- 页面头部 -->
 			<header class="header">
 				<div>
-					<img src="/images/logo.png" class="logo">
+					<img :src="config.logo" class="logo">
 				</div>
 				<div>
-					<h1 class="title">PMSC 2017 Workshop Dinner</h1>
+					<h1 class="title">{{ config.name }}</h1>
 				</div>
 				<div>
 					<h1 class="num">当前抽奖池：{{ baseList.length }}人</h1>
@@ -170,9 +170,12 @@
 </template>
 
 <script>
+	import config from './config.js'
+
 	export default {
 		data() {
 			return {
+				config: {},           // 页面配置  
 				baseList: [],         // 抽奖池
 				goalList: [],         // 已中奖名单
 				activeList:[],        // 抽奖中的名单
@@ -195,6 +198,7 @@
 		},
 		mounted() {
 			this.loadListData();
+			this.config = config;
 		},
 		watch: {
 			baseList (val) {
@@ -375,7 +379,7 @@
 					this.errorText = "解锁密码不能为空!";
 					return false;
 				}
-				if (this.lockPwd == 'benq2018'){
+				if (this.lockPwd == this.config.password){
 					this.is_locked = false;
 				}else{
 					this.errorText = "解锁密码错误!";
