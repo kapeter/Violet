@@ -1,6 +1,6 @@
 <template>
-	<div class="full-bg">
-		<div class="video-box">
+	<div class="full-bg" :style="{background: 'url('+ config.bgUrl +')' }">
+		<div class="video-box" v-if="config.bgType == 'video'">
 			<video :src="config.bgUrl" autoplay="autoplay" loop="loop">
 				您的浏览器不支持 video 标签。
 			</video>
@@ -190,7 +190,7 @@
 				timer: null,          // 全局定时器
 				modalVisiable: false, // 模态框是否可见
 				listVisiable: false,  // 列表是否可见
-				is_locked: true,      // 是否锁定页面
+				is_locked: false,      // 是否锁定页面
 				lockPwd: '',          // 解锁密码
 				errorText: '',        // 输入密码时的错误文本
 				speed: 30,            // 定时器初始速度
