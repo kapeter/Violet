@@ -44,15 +44,15 @@ class RegisterController extends Controller
 
         $userData = $this->party->where('openid', $wxUser['id'])->first();
 
+        $data = $request->all();
+
         if (!$userData){
-          $userData = [
+          $userData = array_merge($data, [
             'openid'     => $wxUser['id'],
             'nickname'   => $wxUser['nickname'], 
             'headimgurl' => $wxUser['avatar'], 
-            'fullname'   => $request->get('name'), 
-            'number'     => $request->get('number'), 
             'has_drawn'  => false
-          ];
+          ]);
 
           $this->party->fill($userData);
 

@@ -1,5 +1,5 @@
-$body-bg: #0d0e28;
-$text-color: #ffffff;
+$body-bg: #f1f2f3;
+$text-color: #1d1d26;
 
 * {
 	padding: 0;
@@ -11,8 +11,8 @@ html,body {
 }
 body {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 0.22rem;
-	line-height: 2;
+	font-size: 0.24rem;
+	line-height: 1.75;
 	color: $text-color;
 	background-color: $body-bg;
 	overflow-x: hidden;
@@ -20,69 +20,91 @@ body {
 .text-left{
 	text-align: left;
 }
-.register-bg{
+.full-bg{
 	width: 100%;
 	height: 100%;
 	position: relative;
-	background: url('../img/reg-bg.jpg') no-repeat;
+	background-color: #f1f2f3;
+	display: flex;
+	flex-direction: column;
+}
+.header {
+	width: 100%;
+	height: 1.2rem;
+	padding: .3rem .45rem;
+	box-sizing: border-box;
+	background: url('../img/reg-header.jpg') no-repeat;
 	background-size: cover;
-	background-position: center bottom;
 }
-.logo{
-	position: absolute;
-	left: 0.15rem;
-	top: 0.15rem;
-	height: 0.54rem;
-}
-.logo img{
+.header img{
 	height: 100%;
+	float: right;
 }
 .content{
-	width: 68%;
-	margin: 0 auto;
-	padding-top: 1.5rem;
-	text-align: center;
-}
-.content .avatar{
-	display: inline-block;
-	width: 1.28rem;
-	height: 1.28rem;
-	border-radius: 50%;
-	border: 1px solid #66ccff;
-	box-shadow: 0px 0px 0.3rem #66ccff;
+	width: 100%;
+	margin: 0.1rem 0;
+	padding: 0.3rem 0.45rem;
+	box-sizing: border-box;
+	text-align: justify;
+	background-color: #f1f2f3;
+	flex: 1;
 }
 .content h1{
-	font-size: 0.32rem;
+	font-size: 0.48rem;
 	margin-bottom: .15rem;
 	letter-spacing: 0.01rem;
+	text-align: center;
+	font-weight: normal;
 }
+
 .form{
-	padding: 0.45rem 0;
+	padding: 0.3rem 0;
 }
 .form .form-group{
 	margin-bottom: 0.3rem;
 }
+.form .form-group label{
+	display: block;
+	margin-bottom: 0.05rem;
+}
 .form .form-group input{
 	box-sizing: border-box;
 	width: 100%;
-	padding: 0.15rem 0.3rem;
+	padding: 0.1rem 0.15rem;
 	outline: 0;
-	border: 1px solid #2b6198;
-	border-radius: 0.3rem;
-	text-align: center;
-	box-shadow: 0px 0px 0.15rem #66ccff;
+	border: 1px solid #b5b5b5;
+	border-radius: 4px;
+}
+.form .form-group .option-list{
+	list-style: none;
+	border: 1px solid #b5b5b5;
+	border-radius: 4px;
+	background-color: #fff;
+	line-height: 2;
+}
+.form .form-group .option-list li{
+	border-bottom: 1px solid #b5b5b5;
+	padding: 0 0.15rem; 
+}
+.form .form-group .option-list li:last-child{
+	border-bottom: 0;
+}
+.form .form-group .option-list input{
+	display: inline;
+	width: auto;
+	margin-right: 0.05rem;
 }
 .form .form-group button{
 	box-sizing: border-box;
 	width: 100%;
-	padding: 0.15rem 0.3rem;
+	margin-top: 0.3rem;
+	padding: 0.15rem 0;
 	outline: 0;
-	border: 1px solid #2b6198;
-	border-radius: 0.3rem;
+	border: 0;
+	border-radius: 4px;
 	text-align: center;
-	box-shadow: 0px 0px 0.15rem #66ccff;
 	transition: all 0.25s ease-out;
-	background-color: #4587ca;
+	background: linear-gradient(45deg, #00d2ec, #00d398);
 	color: #fff;	
 }
 .form .form-group button:acitve{
@@ -92,17 +114,35 @@ body {
 	width: 100%;
 	margin: 0.1rem 0;
 }
-.copyright{
-	position: absolute;
-	left: 0;
-	bottom: 0.1rem;
+.footer{
 	width: 100%;
+	padding: 0.3rem 0;
 	text-align: center;
-	font-size: 0.18rem;
+	color: #fff;
+	background: url('../img/reg-footer.jpg') no-repeat;
+	background-size: cover;
+	font-size: 0.20rem;
 }
 .error-text{
 	color: #f53c49;
 }
 
-
-
+.main{
+	background: linear-gradient(90deg, #00d2ec, #00d398);
+	flex: 1;
+}
+.success{
+	background: linear-gradient(45deg, #00d2ec, #00d398);
+	color: #fff;
+}
+.success .content{
+	background-color: transparent;
+}
+.success img{
+	max-width: 75%;
+	display: block;
+	margin: 0.45rem auto;
+}
+.success p{
+	text-align: center;
+}

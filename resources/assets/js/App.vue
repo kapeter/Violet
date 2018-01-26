@@ -7,14 +7,14 @@
 		</div>
 		<div v-if="is_locked">
 			<div class="lock-box">
-				<h1 class="title">Welcome To {{ config.name }}</h1>
+				<h1 class="title">欢迎参加{{ config.name }}</h1>
 				<form class="form" @submit.prevent="checkPwd()">
 					<input type="password" name="password" class="form-control" placeholder="请输入解锁密码" v-model="lockPwd" @keyup.enter="submit">
 					<button class="btn" @click="checkPwd()"><i class="iconfont">&#xe9d0;</i></button>
 					<p class="error-text" v-if="errorText != ''">{{ errorText }}</p>
 				</form>
-				<img :src="config.codeUrl" alt="二维码">
-				<p>微信扫描二维码，进入抽奖池</p>
+				<img :src="config.codeUrl" alt="二维码" class="qcode">
+				<p>扫描二维码，关注【明基视界】，参与抽奖</p>
 			</div>
 		</div>
 		<div v-else class="main">
@@ -62,14 +62,14 @@
 								<tr>
 									<th>头像</th>
 									<th>姓名</th>
-									<th>员工工号</th>
+									<!-- <th>员工工号</th> -->
 								</tr>							
 							</thead>
 							<tbody>
 								<tr v-for="user in baseList">
 									<td><img :src="user.headimgurl" :alt="user.nickname"></td>
 									<td>{{ user.fullname }}</td>
-									<td>{{ user.number }}</td>
+									<!-- <td>{{ user.number }}</td> -->
 								</tr>
 							</tbody>
 						</table>
@@ -81,14 +81,14 @@
 								<tr>
 									<th>头像</th>
 									<th>姓名</th>
-									<th>员工工号</th>
+									<!-- <th>员工工号</th> -->
 								</tr>							
 							</thead>
 							<tbody>
 								<tr v-for="user in goalList">
 									<td><img :src="user.headimgurl" :alt="user.nickname"></td>
 									<td>{{ user.fullname }}</td>
-									<td>{{ user.number }}</td>
+							<!-- 		<td>{{ user.number }}</td> -->
 								</tr>
 							</tbody>
 						</table>
@@ -190,7 +190,7 @@
 				timer: null,          // 全局定时器
 				modalVisiable: false, // 模态框是否可见
 				listVisiable: false,  // 列表是否可见
-				is_locked: false,      // 是否锁定页面
+				is_locked: true,      // 是否锁定页面
 				lockPwd: '',          // 解锁密码
 				errorText: '',        // 输入密码时的错误文本
 				speed: 30,            // 定时器初始速度
@@ -283,6 +283,11 @@
 				let _self = this;
 				let len = _self.goalNum;
 				let sum = _self.baseList.length;
+
+				if (sum == 0) {
+					alert('当前抽奖池无用户，抽奖失败');
+					return false;
+				}
 
 				// 初始化
 				_self.goalStatus = 1;

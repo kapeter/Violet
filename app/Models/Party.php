@@ -16,7 +16,20 @@ class Party extends Model
         'nickname', 
         'headimgurl', 
         'fullname', 
-        'number', 
-        'has_drawn'
+        'phone', 
+        'has_drawn',
+        'topic3',
+        'topic4',
+        'topic5',
+        'topic6',
+        'topic7',
+        'topic8_1',
+        'topic8_2',
+        'topic8_3',
+        'topic8_4',
+        'topic9_1',
+        'topic9_2',
+        'topic9_3',
+        'topic9_4'
     ];
 }

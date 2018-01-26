@@ -56,7 +56,7 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-$active-color: #45cbbb;
+$active-color: #39c5bb;
 
 @mixin black-mask {
 	background-color: rgba(69, 203, 187, 0.35);
@@ -131,7 +131,11 @@ button:hover{
 		color: $active-color;
 		text-transform: uppercase;
 		font-style: italic;		
+		letter-spacing: 1px;
 		text-shadow: 0px 0px 15px $active-color;
+	}
+	.qcode{
+		max-width: 320px;
 	}
 	.form{
 		width: 540px;
@@ -196,6 +200,7 @@ button:hover{
 			text-transform: uppercase;
 			font-style: italic;
 		    text-shadow: 0px 0px 15px $active-color;
+		    letter-spacing: 1px;
 		}
 		.num{
 			line-height: 2;

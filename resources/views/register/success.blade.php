@@ -13,22 +13,17 @@
     <link rel="stylesheet" href="{{ mix('css/register.css') }}">
 </head>
 <body>
-    <div class="register-bg">
-        <div class="logo">
-            <img src="/images/logo.png" alt="BenQ">
-        </div>
-        <div class="content">
-            <img src="{{ $user['headimgurl'] }}" class="avatar">
-            <h1>{{ $user['fullname'] }}</h1>
-            <p>欢迎参加2018年部门年会。</p>
-            <p>您已进入抽奖池，祝您好运。</p>
-            <img src="/images/it.png" alt="map" class="map">
-            <p class="text-left">地址：新区玉山路69号(近馨泰花园北门)</p>
-            <p class="text-left">时间：1月19日 18:00</p>
-        </div>
-        <div class="copyright">
-            <p>Published By Kapeter</p>
-        </div>
+    <div class="full-bg">
+        <header class="header">
+            <img src="/images/logo.png" alt="BenQ" class="logo">
+        </header>
+        <main class="main success">
+            <div class="content">
+                <img src="/images/ok.png">
+                <h1>感谢参与问卷调查！</h1>
+                <p>现在您已在抽奖池中，神秘大奖等你来拿~</p>
+            </div>           
+        </main>
     </div>
 </body>
 </html>
