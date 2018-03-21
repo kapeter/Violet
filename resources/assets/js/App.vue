@@ -16,6 +16,7 @@
 				<img :src="config.codeUrl" alt="二维码" class="qcode">
 				<p>扫描二维码，关注【明基视界】，参与抽奖</p>
 			</div>
+			<p class="copyright">技术支持 - <a href="https://www.kapeter.com">kapeter.com</a></p>
 		</div>
 		<div v-else class="main">
 			<!-- 页面头部 -->
@@ -97,10 +98,26 @@
 			</div>
 			<!-- 页面底部 -->
 			<footer class="footer">
-				<div class="copyright">
-					<img src="/images/mylogo.png" alt="kapeter">
-					<p>技术支持</p>
-				</div>
+				<nav class="nav">
+					<ul class="nav-list">
+						<li>
+							<button @click="toggleList()">
+								<div class="circle">
+									<i class="iconfont">&#xe9b4;</i>
+								</div>
+								查看列表
+							</button>
+						</li>
+						<li>
+							<button @click="loadListData()">
+								<div class="circle">
+									<i class="iconfont">&#xe62a;</i>
+								</div>
+								刷新列表
+							</button>
+						</li>
+					</ul>
+				</nav>
 				<div class="operation">
 					<ul class="operation-list clearfix">
 						<li class="adder">
@@ -120,7 +137,7 @@
 				</div>
 				<nav class="nav">
 					<ul class="nav-list">
-						<li>
+						<li class="pull-right">
 							<button @click="returnLocked()">
 								<div class="circle">
 									<i class="iconfont">&#xe9ad;</i>
@@ -128,20 +145,12 @@
 								锁定页面
 							</button>
 						</li>
-						<li>
+						<li class="pull-right">
 							<button @click="modalVisiable = true">
 								<div class="circle">
 									<i class="iconfont">&#xe9cd;</i>
 								</div>
 								重置奖池
-							</button>
-						</li>
-						<li>
-							<button @click="toggleList()">
-								<div class="circle">
-									<i class="iconfont">&#xe9b4;</i>
-								</div>
-								查看列表
 							</button>
 						</li>
 					</ul>
@@ -281,23 +290,23 @@
 			// 开始抽奖，抽奖动画
 			start() {
 				let _self = this;
-				let len = _self.goalNum;
 				let sum = _self.baseList.length;
 
+			
 				if (sum == 0) {
 					alert('当前抽奖池无用户，抽奖失败');
 					return false;
 				}
 				// 当抽奖池人数小于当前抽奖人数
-				if (len > sum) {
-					len = sum;
+				if (_self.goalNum > sum) {
+					_self.goalNum = sum;
 				}
 
 				// 初始化
 				_self.goalStatus = 1;
 				_self.activeList = new Array();
 				clearInterval(_self.timer);
-				for (let i = 0; i < len; i++){
+				for (let i = 0; i < _self.goalNum; i++){
 					let r = Math.floor(Math.random() * sum)  // 随机数
 					_self.activeList.push(_self.baseList[r]);
 				}
@@ -305,13 +314,13 @@
 				// 计算头像尺寸
 				let dom = document.getElementById('content');
 				let h = dom.offsetHeight - 200;
-				let w = (dom.offsetWidth - 60) / len - 30;
+				let w = (dom.offsetWidth - 60) / _self.goalNum - 30;
 				_self.avatarContent = h > w ? w : h;
 				_self.goalMargin = (dom.offsetHeight - _self.avatarContent - 164) / 2;
 
 				// 变换动画
 				_self.timer = setInterval(() => {
-					for (let i = 0; i < len; i++){
+					for (let i = 0; i < _self.goalNum; i++){
 						let r = Math.floor(Math.random() * sum);  // 随机数
 						_self.activeList.splice(i, 1, _self.baseList[r]);
 					}			
@@ -339,11 +348,10 @@
 			// 确定名单后的减速动画
 			setTimer() {
 				let _self = this
-				let len = _self.goalNum;
 				let sum = _self.baseList.length;
 				_self.speed += 15;
 				_self.timer = setTimeout(() => {
-					for (let i = 0; i < len; i++){
+					for (let i = 0; i < _self.goalNum; i++){
 						let r = Math.floor(Math.random() * sum);  // 随机数
 						_self.activeList.splice(i, 1, _self.baseList[r]);
 					}			
