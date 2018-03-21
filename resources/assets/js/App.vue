@@ -288,6 +288,10 @@
 					alert('当前抽奖池无用户，抽奖失败');
 					return false;
 				}
+				// 当抽奖池人数小于当前抽奖人数
+				if (len > sum) {
+					len = sum;
+				}
 
 				// 初始化
 				_self.goalStatus = 1;
