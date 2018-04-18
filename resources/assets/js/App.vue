@@ -1,5 +1,5 @@
 <template>
-	<div class="full-bg" :style="{background: 'url('+ config.bgUrl +')' }">
+	<div class="full-bg" :style="{backgroundImage: 'url('+ config.bgUrl +')' }">
 		<div class="video-box" v-if="config.bgType == 'video'">
 			<video :src="config.bgUrl" autoplay="autoplay" loop="loop">
 				您的浏览器不支持 video 标签。

@@ -67,13 +67,14 @@ body {
 	display: block;
 	margin-bottom: 0.05rem;
 }
-.form .form-group input{
+.form .form-group input, .form .form-group textarea{
 	box-sizing: border-box;
 	width: 100%;
 	padding: 0.15rem;
 	outline: 0;
 	border: 1px solid #b5b5b5;
 	border-radius: 4px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .form .form-group .option-list{
 	list-style: none;
