@@ -24,7 +24,7 @@
 				<form class="form" id="form" action="/wechat/register" method="POST">
 					{{ csrf_field() }}
 					<div class="form-group">
-						<label>1. 请您对本次会议的整体组织进行评分？</label>
+						<label>1. 请您对本次会议的整体组织进行评分。</label>
 						<ul class="option-list">
 							<li><input type="radio" name="issue1" value="5"> 5分</li>
 							<li><input type="radio" name="issue1" value="4"> 4分</li>
@@ -34,7 +34,7 @@
 						</ul>
 					</div>	
 					<div class="form-group">
-						<label>2. 请您对本次会议端木晓斌的报告<跃上新投，迁影成金>进行评分？</label>
+						<label>2. 请您对本次会议端木晓斌的报告<跃上新投，迁影成金>进行评分。</label>
 						<ul class="option-list">
 							<li><input type="radio" name="issue2" value="5"> 5分</li>
 							<li><input type="radio" name="issue2" value="4"> 4分</li>
@@ -44,7 +44,7 @@
 						</ul>
 					</div>	
 					<div class="form-group">
-						<label>3. 请您对本次会议童思铭的<智能商务/会议平板>报告进行评分？</label>
+						<label>3. 请您对本次会议童思铭的<智能商务/会议平板>报告进行评分。</label>
 						<ul class="option-list">
 							<li><input type="radio" name="issue3" value="5"> 5分</li>
 							<li><input type="radio" name="issue3" value="4"> 4分</li>
@@ -54,7 +54,7 @@
 						</ul>
 					</div>
 					<div class="form-group">
-						<label>4. 请您对本次会议刘洋的<家用市场>报告进行评分？</label>
+						<label>4. 请您对本次会议刘洋的<家用市场>报告进行评分。</label>
 						<ul class="option-list">
 							<li><input type="radio" name="issue4" value="5"> 5分</li>
 							<li><input type="radio" name="issue4" value="4"> 4分</li>
@@ -64,7 +64,7 @@
 						</ul>
 					</div>
 					<div class="form-group">
-						<label>5. 请您对本次会议蔡志昌的<教育市场>报告进行评分？</label>
+						<label>5. 请您对本次会议蔡志昌的<教育市场>报告进行评分。</label>
 						<ul class="option-list">
 							<li><input type="radio" name="issue5" value="5"> 5分</li>
 							<li><input type="radio" name="issue5" value="4"> 4分</li>
@@ -74,7 +74,7 @@
 						</ul>
 					</div>
 					<div class="form-group">
-						<label>6. 请您对本次会议张志军的<工程/教育/商显市场>报告进行评分？</label>
+						<label>6. 请您对本次会议张志军的<工程/商显市场>报告进行评分。</label>
 						<ul class="option-list">
 							<li><input type="radio" name="issue6" value="5"> 5分</li>
 							<li><input type="radio" name="issue6" value="4"> 4分</li>
@@ -115,7 +115,7 @@
 						<input type="text" name="email" placeholder="联系方式">
 					</div>	
 					<div class="form-group">
-						<label>12. 您对本次会议有什么意见或者建议吗？【选填】</label>
+						<label>12.如果您对本次会议有什么意见或者建议，请填写在下方【选填】</label>
 						<textarea rows="5" name="suggest" placeholder="您对本次会议有什么意见或者建议吗？"></textarea>
 					</div>			
 					<div class="form-group">
@@ -146,14 +146,26 @@
 					return false;
 				}
 
-				if (document.querySelector('input[name=phone]').value == ''){
+				var phone = document.querySelector('input[name=phone]').value;
+				if (phone == ''){
 					errBox.innerText = "请填写联系方式";
 					return false;
 				}
 
-				if (document.querySelector('input[name=email]').value == ''){
+				if (!isPhoneAvailable(phone)) {
+					errBox.innerText = "手机号格式错误";
+					return false;
+				}
+
+
+				var mail = document.querySelector('input[name=email]').value
+				if (mail == ''){
 					errBox.innerText = "请填写邮箱";
 					return false;
+				}
+				if (!isMailAvailable(mail)){
+					errBox.innerText = "邮箱格式错误";
+					return false;					
 				}
 
 				var errCount = 0;
@@ -179,6 +191,24 @@
 				}
 				
 			})
+
+			function isPhoneAvailable(phone) {  
+			   var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;  
+			   if (!myreg.test(phone)) {  
+			     return false;  
+			   } else {  
+			     return true;  
+			   }  
+			}
+
+			function isMailAvailable(mail) {  
+			   var myreg = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/;  
+			   if (!myreg.test(mail)) {  
+			     return false;  
+			   } else {  
+			     return true;  
+			   }  
+			}
 		}
 	</script>
 </html>
