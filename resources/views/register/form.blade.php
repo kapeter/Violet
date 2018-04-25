@@ -44,7 +44,7 @@
 						</ul>
 					</div>	
 					<div class="form-group">
-						<label>3. 请您对本次会议童思铭的<智能商务/会议平板>报告进行评分。</label>
+						<label>3. 请您对本次会议李治林的<智能商务/会议平板>报告进行评分。</label>
 						<ul class="option-list">
 							<li><input type="radio" name="issue3" value="5"> 5分</li>
 							<li><input type="radio" name="issue3" value="4"> 4分</li>
@@ -64,7 +64,7 @@
 						</ul>
 					</div>
 					<div class="form-group">
-						<label>5. 请您对本次会议蔡志昌的<教育市场>报告进行评分。</label>
+						<label>5. 请您对本次会议董翊的<教育市场>报告进行评分。</label>
 						<ul class="option-list">
 							<li><input type="radio" name="issue5" value="5"> 5分</li>
 							<li><input type="radio" name="issue5" value="4"> 4分</li>
