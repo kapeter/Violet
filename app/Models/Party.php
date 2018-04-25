@@ -26,6 +26,7 @@ class Party extends Model
         'issue5',
         'issue6',
         'issue7',
-        'issue8'
+        'issue8',
+        'suggest'
     ];
 }
