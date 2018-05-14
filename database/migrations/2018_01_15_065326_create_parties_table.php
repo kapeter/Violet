@@ -36,10 +36,12 @@ class CreatePartiesTable extends Migration
             $table->string('issue5');
             $table->string('issue6');
             $table->string('issue7');
+            $table->string('issue7_more')->nullable();
             $table->string('issue8');
-            $table->string('fullname');
-            $table->string('phone');
-            $table->string('email');
+            // $table->string('fullname');
+            // $table->string('phone');
+            // $table->string('email');
+            $table->text('think')->nullable();
             $table->text('suggest')->nullable();
             $table->boolean('has_drawn')->default(false);
             $table->timestamps();

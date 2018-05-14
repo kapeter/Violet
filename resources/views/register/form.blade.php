@@ -20,7 +20,7 @@
 		<main class="main">
 			<div class="content">
 				<h1>问卷调查</h1>
-				<p>感谢您对本次活动的大力支持！未来我们希望为您提供定制化的服务内容，因此需要您配合进行如下问卷调查，再次感谢您的填写！</p>
+				<p>填写问卷即可参与晚宴抽奖，有机会赢取价值1999元明基Hatha台灯一部！</p>
 				<form class="form" id="form" action="/wechat/register" method="POST">
 					{{ csrf_field() }}
 					<div class="form-group">
@@ -34,7 +34,7 @@
 						</ul>
 					</div>	
 					<div class="form-group">
-						<label>2. 请您对本次会议端木晓斌的报告<跃上新投，迁影成金>进行评分。</label>
+						<label>2. 请您对本次会议陈凯耀的报告<跃上新投，引领新趋势>进行评分。</label>
 						<ul class="option-list">
 							<li><input type="radio" name="issue2" value="5"> 5分</li>
 							<li><input type="radio" name="issue2" value="4"> 4分</li>
@@ -44,7 +44,7 @@
 						</ul>
 					</div>	
 					<div class="form-group">
-						<label>3. 请您对本次会议李治林的<智能商务/会议平板>报告进行评分。</label>
+						<label>3. 请您对本次会议黄仁宏的报告<跃上新投，为销售插上一双翅膀>进行评分。</label>
 						<ul class="option-list">
 							<li><input type="radio" name="issue3" value="5"> 5分</li>
 							<li><input type="radio" name="issue3" value="4"> 4分</li>
@@ -54,7 +54,7 @@
 						</ul>
 					</div>
 					<div class="form-group">
-						<label>4. 请您对本次会议刘洋的<家用市场>报告进行评分。</label>
+						<label>4. 请您对本次会议端木晓斌的报告<渠道为王，迁影成金>进行评分。</label>
 						<ul class="option-list">
 							<li><input type="radio" name="issue4" value="5"> 5分</li>
 							<li><input type="radio" name="issue4" value="4"> 4分</li>
@@ -64,7 +64,7 @@
 						</ul>
 					</div>
 					<div class="form-group">
-						<label>5. 请您对本次会议董翊的<教育市场>报告进行评分。</label>
+						<label>5. 请您对本次会议刘茂瑞的报告<烈火燎原，迁影成金>进行评分	。</label>
 						<ul class="option-list">
 							<li><input type="radio" name="issue5" value="5"> 5分</li>
 							<li><input type="radio" name="issue5" value="4"> 4分</li>
@@ -74,7 +74,7 @@
 						</ul>
 					</div>
 					<div class="form-group">
-						<label>6. 请您对本次会议张志军的<工程/商显市场>报告进行评分。</label>
+						<label>6. 请您对本次会议许斌的报告<厚积薄发，迁影成金>进行评分。</label>
 						<ul class="option-list">
 							<li><input type="radio" name="issue6" value="5"> 5分</li>
 							<li><input type="radio" name="issue6" value="4"> 4分</li>
@@ -84,38 +84,34 @@
 						</ul>
 					</div>			
 					<div class="form-group">
-						<label>7. 您公司所在的行业是？【单选】</label>
+						<label>7. 您对本次会议报告中的哪些内容比较感兴趣【可多选】	</label>
 						<ul class="option-list">
-							<li><input type="radio" name="issue7" value="IT卖场"> IT卖场</li>
-							<li><input type="radio" name="issue7" value="渠道分销"> 渠道分销</li>
-							<li><input type="radio" name="issue7" value="零散行业"> 零散行业</li>
-							<li><input type="radio" name="issue7" value="ProAV"> ProAV</li>
-							<li><input type="radio" name="issue7" value="系统集成"> 系统集成</li>
+							<li><input type="checkbox" class="checkbox" name="issue7[]" value="市场趋势"> 市场趋势</li>
+							<li><input type="checkbox" class="checkbox" name="issue7[]" value="技术发展"> 技术发展</li>
+							<li><input type="checkbox" class="checkbox" name="issue7[]" value="产品介绍"> 产品介绍</li>
+							<li><input type="checkbox" class="checkbox" name="issue7[]" value="方案动态"> 方案动态</li>
+							<li><input type="checkbox" class="checkbox" name="issue7[]" value="行销活动"> 行销活动</li>
+							<li>
+								<p><input type="checkbox" class="checkbox" name="issue7[]" value="其他"> 其他</p>
+								<textarea name="issue7_more" placeholder="其他"></textarea>
+							</li>
 						</ul>
 					</div>		
 					<div class="form-group">
-						<label>8. 您在公司所担任的职务是？【单选】</label>
+						<label>8. 您认为本次会议相关议题交流对于您自身业务的帮助大吗？</label>
 						<ul class="option-list">
-							<li><input type="radio" name="issue8" value="总经理"> 总经理</li>
-							<li><input type="radio" name="issue8" value="销售经理"> 销售经理</li>
-							<li><input type="radio" name="issue8" value="技术支持"> 技术支持</li>
-							<li><input type="radio" name="issue8" value="市场推广"> 市场推广</li>
+							<li><input type="radio" name="issue8" value="帮助很大"> 帮助很大</li>
+							<li><input type="radio" name="issue8" value="有帮助，但无重大作用"> 有帮助，但无重大作用</li>
+							<li><input type="radio" name="issue8" value="帮助不大"> 帮助不大</li>
+							<li><input type="radio" name="issue8" value="无帮助"> 无帮助</li>
 						</ul>
 					</div>	
 					<div class="form-group">
-						<label>9. 您的姓名 [填空]</label>
-						<input type="text" name="fullname" placeholder="姓名">
-					</div>
-					<div class="form-group">
-						<label>10. 您的联系方式 [填空]</label>
-						<input type="text" name="phone" placeholder="联系方式">
-					</div>
-					<div class="form-group">
-						<label>11. 您的邮箱 [填空]</label>
-						<input type="text" name="email" placeholder="联系方式">
+						<label>9.您对本次会议的心得与感想（心得写得好，中奖机会高）【选填】	</label>
+						<textarea rows="5" name="think" placeholder="您对本次会议有什么意见或者建议吗？"></textarea>
 					</div>	
 					<div class="form-group">
-						<label>12.如果您对本次会议有什么意见或者建议，请填写在下方【选填】</label>
+						<label>10.如果您对本次会议有什么意见或者建议，请填写在下方【选填】</label>
 						<textarea rows="5" name="suggest" placeholder="您对本次会议有什么意见或者建议吗？"></textarea>
 					</div>			
 					<div class="form-group">
@@ -141,43 +137,54 @@
 				var e = event || window.event;
 				e.preventDefault();
 
-				if (document.querySelector('input[name=fullname]').value == ''){
-					errBox.innerText = "请填写姓名";
-					return false;
-				}
+				// if (document.querySelector('input[name=fullname]').value == ''){
+				// 	errBox.innerText = "请填写姓名";
+				// 	return false;
+				// }
 
-				var phone = document.querySelector('input[name=phone]').value;
-				if (phone == ''){
-					errBox.innerText = "请填写联系方式";
-					return false;
-				}
+				// var phone = document.querySelector('input[name=phone]').value;
+				// if (phone == ''){
+				// 	errBox.innerText = "请填写联系方式";
+				// 	return false;
+				// }
 
-				if (!isPhoneAvailable(phone)) {
-					errBox.innerText = "手机号格式错误";
-					return false;
-				}
+				// if (!isPhoneAvailable(phone)) {
+				// 	errBox.innerText = "手机号格式错误";
+				// 	return false;
+				// }
 
 
-				var mail = document.querySelector('input[name=email]').value
-				if (mail == ''){
-					errBox.innerText = "请填写邮箱";
-					return false;
-				}
-				if (!isMailAvailable(mail)){
-					errBox.innerText = "邮箱格式错误";
-					return false;					
-				}
+				// var mail = document.querySelector('input[name=email]').value
+				// if (mail == ''){
+				// 	errBox.innerText = "请填写邮箱";
+				// 	return false;
+				// }
+				// if (!isMailAvailable(mail)){
+				// 	errBox.innerText = "邮箱格式错误";
+				// 	return false;					
+				// }
 
 				var errCount = 0;
 				for (var i = 1; i <= 8; i++){
-					var oRadio = document.querySelectorAll('input[name=issue' + i + ']');
 					var flag = false;
-					for (var j = 0; j < oRadio.length; j++){
-						if (oRadio[j].checked){
-							flag = true;
-							break;
+					if (i == 7){
+						var oCheck = document.querySelectorAll('.checkbox');
+						for (var j = 0; j < oCheck.length; j++){
+							if (oCheck[j].checked){
+								flag = true;
+								break;
+							}
+						}
+					}else{
+						var oRadio = document.querySelectorAll('input[name=issue' + i + ']');
+						for (var j = 0; j < oRadio.length; j++){
+							if (oRadio[j].checked){
+								flag = true;
+								break;
+							}
 						}
 					}
+
 					if (!flag) {
 						errCount++;
 					}

@@ -15,9 +15,9 @@ class Party extends Model
         'openid', 
         'nickname', 
         'headimgurl', 
-        'fullname', 
-        'email',
-        'phone', 
+        // 'fullname', 
+        // 'email',
+        // 'phone', 
         'has_drawn',
         'issue1',
         'issue2',
@@ -26,7 +26,9 @@ class Party extends Model
         'issue5',
         'issue6',
         'issue7',
+        'issue7_more',
         'issue8',
+        'think',
         'suggest'
     ];
 }

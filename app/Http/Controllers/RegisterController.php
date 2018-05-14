@@ -51,7 +51,8 @@ class RegisterController extends Controller
             'openid'     => $wxUser['id'],
             'nickname'   => $wxUser['nickname'], 
             'headimgurl' => $wxUser['avatar'], 
-            'has_drawn'  => false
+            'has_drawn'  => false,
+            'issue7'     => implode(',', $request->issue7)
           ]);
 
           $this->party->fill($userData);
