@@ -38,7 +38,7 @@ class CreatePartiesTable extends Migration
             $table->string('issue7');
             $table->string('issue7_more')->nullable();
             $table->string('issue8');
-            // $table->string('fullname');
+            $table->string('fullname');
             // $table->string('phone');
             // $table->string('email');
             $table->text('think')->nullable();

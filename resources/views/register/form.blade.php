@@ -107,11 +107,15 @@
 						</ul>
 					</div>	
 					<div class="form-group">
-						<label>9.您对本次会议的心得与感想（心得写得好，中奖机会高）【选填】	</label>
+						<label>9. 您的姓名？【必填】</label>
+						<input type="text" name="fullname" placeholder="您的姓名？">
+					</div>	
+					<div class="form-group">
+						<label>10.您对本次会议的心得与感想（心得写得好，中奖机会高）【选填】	</label>
 						<textarea rows="5" name="think" placeholder="您对本次会议有什么意见或者建议吗？"></textarea>
 					</div>	
 					<div class="form-group">
-						<label>10.如果您对本次会议有什么意见或者建议，请填写在下方【选填】</label>
+						<label>11.如果您对本次会议有什么意见或者建议，请填写在下方【选填】</label>
 						<textarea rows="5" name="suggest" placeholder="您对本次会议有什么意见或者建议吗？"></textarea>
 					</div>			
 					<div class="form-group">
@@ -137,10 +141,10 @@
 				var e = event || window.event;
 				e.preventDefault();
 
-				// if (document.querySelector('input[name=fullname]').value == ''){
-				// 	errBox.innerText = "请填写姓名";
-				// 	return false;
-				// }
+				if (document.querySelector('input[name=fullname]').value == ''){
+					errBox.innerText = "请填写姓名";
+					return false;
+				}
 
 				// var phone = document.querySelector('input[name=phone]').value;
 				// if (phone == ''){

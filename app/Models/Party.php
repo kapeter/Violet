@@ -15,7 +15,7 @@ class Party extends Model
         'openid', 
         'nickname', 
         'headimgurl', 
-        // 'fullname', 
+        'fullname', 
         // 'email',
         // 'phone', 
         'has_drawn',
